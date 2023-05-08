@@ -70,7 +70,7 @@ router.post('/',verifyToken,async(req,res)=>{
 
 
 
-router.put('/:id',async(req,res)=>{
+router.put('/:id',verifyToken,async(req,res)=>{
   
   try {
     let id = req.params.id;
@@ -125,7 +125,7 @@ var storage = multer.diskStorage({
   var upload = multer({ storage: storage }).single('file');
   router.use(express.static('uploads'))
   
-  router.post('/file', (req, res) => {
+  router.post('/file',verifyToken, async(req, res) => {
     upload(req, res, async (err) => {
       if (err) {
         console.log(err)
