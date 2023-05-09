@@ -115,17 +115,17 @@ router.use(bodyparser.urlencoded({extended:true}))
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'uploads')
+      cb(null, 'uploads');
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
     }
   })
   
-  var upload = multer({ storage: storage }).single('file');
-  router.use(express.static('uploads'))
+  const upload = multer({ storage: storage }).single('file');
+  router.use(express.static('uploads'));
   
-  router.post('/file',verifyToken, async(req, res) => {
+  router.post('/file',  (req, res) => {
     upload(req, res, async (err) => {
       if (err) {
         console.log(err)
@@ -141,6 +141,7 @@ var storage = multer.diskStorage({
           res.status(500).json({ message: 'Error saving data to database' });
         }
       }
+    
     })
   })
   //get single learner to display in update form

@@ -13,7 +13,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
 
-
 const mongoose = require('./db')
 const api = require('./routes/api')
 app.use('/api',api)
